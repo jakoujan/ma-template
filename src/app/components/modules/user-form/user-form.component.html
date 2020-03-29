@@ -1,0 +1,74 @@
+<h3 mat-dialog-title>Datos de usuario</h3>
+<div mat-dialog-content>
+  <form [formGroup]="userForm" novalidate>
+    <mat-card class="sep-bottom-20">
+      <mat-card-header>
+        <h4 mat-card-title>Datos generales</h4>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width">
+              <input matInput placeholder="Nombre" formControlName="name">
+              <mat-error>
+                <custom-mat-error [control]="userForm.controls.name"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width">
+              <input matInput placeholder="Usuario" formControlName="username">
+              <mat-error>
+                <custom-mat-error [control]="userForm.controls.username"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width">
+              <input matInput placeholder="Correo electronico" formControlName="email">
+              <mat-error>
+                <custom-mat-error [control]="userForm.controls.email"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="sep-bottom-20">
+      <mat-card-header>
+        <h4 mat-card-title>Permisos</h4>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-accordion >
+          <mat-expansion-panel *ngFor="let module of permissions" [class.mat-elevation-z0]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{module.name}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list>
+              <mat-list-item *ngFor="let submodule of module.submodules">
+                {{submodule.name}}
+                <div class="filler"></div>
+                <mat-checkbox color="primary" [disabled]="submodule.write" [checked]="submodule.access"
+                  (change)="accessCheckboxChange(submodule, $event)" class="sep-right-15">Acceso</mat-checkbox>
+                <mat-checkbox color="primary" [checked]="submodule.write"
+                  (change)="writeCheckboxChange(submodule, $event)">Lectura</mat-checkbox>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button class="sep-right-10" color="primary" [disabled]="userForm.invalid"
+    (click)="save()">Guardar</button>
+  <button mat-raised-button (click)="close()">Cancelar</button>
+</div>

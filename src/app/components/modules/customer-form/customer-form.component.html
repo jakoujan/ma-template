@@ -1,0 +1,160 @@
+<h3 mat-dialog-title>Datos de usuario</h3>
+<div mat-dialog-content>
+  <form [formGroup]="form" novalidate>
+    <form [formGroup]="generalDataForm" novalidate>
+      <mat-card class="sep-bottom-20">
+        <mat-card-header>
+          <h4 mat-card-title>Datos generales</h4>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Razon social" formControlName="business_name">
+                <mat-error>
+                  <custom-mat-error [control]="generalDataForm.controls.business_name"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="R.F.C." formControlName="tax_id">
+                <mat-error>
+                  <custom-mat-error [control]="generalDataForm.controls.tax_id"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Contacto" formControlName="contact">
+                <mat-error>
+                  <custom-mat-error [control]="generalDataForm.controls.contact"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Teléfono" formControlName="telephone">
+                <mat-error>
+                  <custom-mat-error [control]="generalDataForm.controls.telephone"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Correo electronico" formControlName="email">
+                <mat-error>
+                  <custom-mat-error [control]="generalDataForm.controls.email"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+    <form [formGroup]="addressForm" novalidate>
+      <mat-card class="sep-bottom-20">
+        <mat-card-header>
+          <h4 mat-card-title>Dirección</h4>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Calle" formControlName="street">
+                <mat-error>
+                  <custom-mat-error [control]="addressForm.controls.street"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-container">
+              <div class="col">
+                <mat-form-field class="input-full-width">
+                  <input matInput placeholder="Numero interior" formControlName="internal_number">
+                  <mat-error>
+                    <custom-mat-error [control]="addressForm.controls.internal_number"></custom-mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="input-full-width">
+                  <input matInput placeholder="Numero exterior" formControlName="external_number">
+                  <mat-error>
+                    <custom-mat-error [control]="addressForm.controls.external_number"></custom-mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Colonia" formControlName="settlement">
+                <mat-error>
+                  <custom-mat-error [control]="addressForm.controls.settlement"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Ciudad" formControlName="city">
+                <mat-error>
+                  <custom-mat-error [control]="addressForm.controls.city"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Municipio" formControlName="county">
+                <mat-error>
+                  <custom-mat-error [control]="addressForm.controls.county"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <mat-select matNativeControl placeholder="Estado" formControlName="state">
+                  <mat-option *ngFor="let state of states" [value]="state.id">{{ state.description }}</mat-option>
+                </mat-select>
+                <mat-error>
+                  <custom-mat-error [control]="addressForm.controls.state"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Codigo postal" formControlName="postal_code">
+                <mat-error>
+                  <custom-mat-error [control]="addressForm.controls.postal_code"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <mat-select matNativeControl placeholder="Pais" formControlName="country">
+                  <mat-option *ngFor="let country of countries" [value]="country.id">{{ country.description }}</mat-option>
+                </mat-select>
+                <mat-error>
+                  <custom-mat-error [control]="addressForm.controls.country"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button class="sep-right-10" color="primary" [disabled]="form.invalid"
+    (click)="save()">Guardar</button>
+  <button mat-raised-button (click)="close()">Cancelar</button>
+</div>

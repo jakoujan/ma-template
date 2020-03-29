@@ -1,0 +1,20 @@
+mat-spinner {
+  margin: 0 auto;
+}
+
+:host {
+  height: 67%;
+}
+
+.spinner-container {
+  height: 100px;
+  width: 100%;
+}
+
+.text {
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+}
+
+

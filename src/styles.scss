@@ -1,1 +1,137 @@
 /* You can add global styles to this file, and also import other style files */
+//@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,800&display=swap');
+@import '~@angular/material/theming';
+
+//$custom-typography: mat-typography-config($font-family: '"Open Sans", sans-serif;');
+//@include mat-core($custom-typography);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+}
+
+.filler {
+  flex: 1 1 auto;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+}
+
+.next-input {
+  margin-left: 15px;
+}
+
+.mat-radio-button {
+  display: block;
+  margin: 5px 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+.sep-right-5 {
+  margin-right: 5px !important;
+}
+
+.sep-right-10 {
+  margin-right: 10px !important;
+}
+
+.sep-right-15 {
+  margin-right: 15px !important;
+}
+
+.sep-bottom-20 {
+  margin-bottom: 20px !important;
+}
+
+tr.mat-row:hover {
+  background: #b4b4b433
+}
+
+.dialog-content {
+  padding: 15px 24px !important;
+  width: 100%;
+  text-align: left;
+}
+
+.module-toolbar {
+  .icon {
+    margin-right: 15px;
+  }
+
+  .search-button {
+    margin-left: 15px;
+  }
+
+  .search-icon {
+    margin-right: 15px;
+  }
+
+
+
+  .search-bar {
+    position: absolute;
+    top: -65px;
+    left: 0;
+    transition: top 0.3s;
+    background: #ffffff;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .showed-search-bar {
+    top: 0;
+    left: 0;
+  }
+}
+
+.card-table {
+  margin: 20px 30px;
+  height: calc(100% - 150px);
+}
+
+.card-table-content {
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 16px;
+}
+
+.sticky-header {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  background: #ffffff;
+}
+
+.sticky-paginator {
+  position: sticky;
+  z-index: 100;
+  bottom: 0;
+}

@@ -1,0 +1,68 @@
+import { IModule } from '../interfaces/module';
+import { Module, MODULES, Submodule, Permission, Action } from "src/app/modules";
+
+
+export function validateProfile(data: any, modules: Array<IModule>): boolean {
+    if (data.validate) {
+        return modules.some(p => {
+            if (data.module === p.id) {
+                return p.submodules.some(sm => sm.id === data.id);
+            }
+            return false;
+        });
+    }
+    return true;
+}
+
+export function buildFormPermissions(modules: Array<Module>, permissions: Array<IModule>): Array<Permission> {
+    const options: Array<Permission> = [];
+    modules.forEach(module => {
+        const option: Permission = {
+            id: module.id,
+            name: module.title,
+            submodules: []
+        };
+        let pm;
+        if (permissions) {
+            pm = permissions.find(p => p.id === module.id);
+        }
+
+        module.submodules.forEach(submodule => {
+            let psm;
+            if (pm) {
+                psm = pm.submodules.find(pms => pms.id === submodule.id);
+            }
+            const sm: Action = {
+                id: submodule.id,
+                name: submodule.name,
+                access: psm !== undefined,
+                write: psm ? psm.write : false
+            };
+            option.submodules.push(sm);
+        });
+        options.push(option);
+    });
+    return options;
+}
+
+export function buildUserPermissions(permissions: Array<Permission>): Array<IModule> {
+    const modules: Array<IModule> = [];
+    permissions.forEach(permission => {
+        const sms = permission.submodules.filter(sm => sm.access);
+        if (sms.length) {
+            const module: IModule = {
+                id: permission.id,
+                submodules: []
+            };
+            sms.forEach(sm => {
+                module.submodules.push({
+                    id: sm.id,
+                    access: sm.access,
+                    write: sm.write
+                });
+            });
+            modules.push(module);
+        }
+    });
+    return modules;
+}
